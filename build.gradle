@@ -1,0 +1,25 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.netflix.nebula:gradle-ospackage-plugin:1.9.1'
+    }
+}
+
+apply plugin: 'os-package'
+
+ospackage {
+	packageName = 'cdplayer'
+	version = '1.0'
+ 	release = 1
+	arch = X86_64
+	os = LINUX
+	
+	postInstall file('scripts/rpm/postInstall.sh')	
+
+	from(file('file/cdp-0.33.tar.gz')) {
+		into '/tmp'
+	}
+}
